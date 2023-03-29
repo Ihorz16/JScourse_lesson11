@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<h3>Задача 3</h3>
+	<p>Морський бій. Випадковим чином на двовимірному полі розміром 6*6 розташовується 5 кораблів. Користувач стріляє
+		вказуючи
+		координати. Гра продовжується поки не потоплено усі кораблі або у користувача не закінчаться снаряди.</p>
+	<script>
+
+		// створюємо поле бою
+		let battleField = []
+		for (let i = 0; i < 6; i++) {
+			battleField[i] = []
+			for (let j = 0; j < 6; j++) {
+				battleField[i][j] = 0
+			}
+		}
+
+		let shipsQuantity = 5
+
+		function getShipPlace() {
+			let shipPlace = 0
+			while (shipPlace < shipsQuantity) {
+				let x = Math.floor(Math.random() * 6)
+				let y = Math.floor(Math.random() * 6)
+				if (battleField[x][y] === 0) battleField[x][y] = 1
+				shipPlace++
+			}
+		}
+
+		let shots = parseInt(prompt('Введіть кількість пострілів'))
+		while (shipsQuantity > 0 && shots > 0) {
+			let x = prompt('Введіть координати по осі Х (від 1 до 6)')
+			let y = prompt('Введіть координати по осі Y (від 1 до 6)')
+			if (battleField[x - 1][y - 1] === 1) {
+				alert('Ви потопили корабель!')
+				shipsQuantity--
+			} else alert('Ви промахнулись(( Спробуйте ще!')
+			shots--
+		}
+
+		if (shipsQuantity === 0) {
+			alert('Ви виграли!')
+		} else {
+			alert('Гра закінчилась. Ви програли. Спробуйте ще!')
+		}
+
+	</script>
+</body>
+
+</html>

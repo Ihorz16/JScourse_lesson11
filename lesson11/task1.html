@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<h3>Задача 1</h3>
+	<p>Знайти суми елементів у вказаній області</p>
+	<script>
+		const rowNum = parseInt(prompt('Введіть кількість рядків'))
+		const colNum = parseInt(prompt('Введіть кількість стовпців'))
+
+		function getRandomArr(arrLength, minV, maxV) {
+			const arr = []
+			for (let i = 0; i < arrLength; i++) {
+				const randomValue = Math.floor(Math.random() * (maxV - minV + 1)) + minV
+				arr.push(randomValue)
+			}
+			return arr
+		}
+
+		function getRandomTable(rowNum, colNum, minV, maxV) {
+			const table = []
+			for (let i = 0; i < rowNum; i++) {
+				const rowRandom = getRandomArr(colNum, minV, maxV)
+				table.push(rowRandom)
+			}
+			return table
+		}
+
+		const userTable = getRandomTable(rowNum, colNum, 1, 100)
+		// 1 завдання
+		function getSumOfFirstPart(userTable) {
+			let sum = 0
+			for (let i = 0; i < Math.floor(userTable.length / 2); i++) {
+				for (let j = 0; j < Math.floor(userTable[i].length / 2); j++) {
+					sum = sum + userTable[i][j]
+				}
+			}
+			return sum
+		}
+		// виводимо результат
+		document.write('Рандомний масив:<br>')
+		document.write("<table border='1'>")
+		for (let i = 0; i < userTable.length; i++) {
+			document.write('<tr>')
+			for (let j = 0; j < userTable[i].length; j++) {
+				document.write(`<td>${userTable[i][j]}</td>`)
+			}
+			document.write('</tr>')
+		}
+		document.write('</table>')
+		document.write(`1)Сума елементів у даній області = ${getSumOfFirstPart(userTable)}<br>`)
+
+		// 2
+		function getSumOfSecondPart(userTable) {
+			let sum = 0
+			let averageRow = Math.floor(userTable.length / 2)
+			for (let i = 0; i < averageRow; i++) {
+				let averageCol = Math.floor(userTable[i].length / 2)
+				for (let j = averageCol; j < userTable[i].length; j++) {
+					sum = sum + userTable[i][j]
+				}
+			}
+			return sum
+		}
+		document.write(`2)Сума елементів у даній області = ${getSumOfSecondPart(userTable)}<br>`)
+
+		// 3
+		function getSumOfThirdPart(userTable) {
+			let sum = 0
+			let averageRow = Math.floor(userTable.length / 2)
+			for (let i = averageRow; i < userTable.length; i++) {
+				let averageCol = Math.floor(userTable[i].length / 2)
+				for (let j = 0; j < averageCol; j++) {
+					sum = sum = userTable[i][j]
+				}
+			}
+			return sum
+		}
+		document.write(`3)Сума елементів у даній області = ${getSumOfThirdPart(userTable)}<br>`)
+
+		// 4
+		function getSumOfFourthPart(userTable) {
+			sum = 0
+			let averageRow = Math.floor(userTable.length / 2)
+			for (let i = averageRow; i < userTable.length; i++) {
+				let averageCol = Math.floor(userTable[i].length / 2)
+				for (let j = averageCol; j < userTable[i].length; j++) {
+					sum = sum + userTable[i][j]
+				}
+			}
+			return sum
+		}
+		document.write(`4)Сума елементів у даній області = ${getSumOfFourthPart(userTable)}<br>`)
+		// 5
+		function getSumOfEvenRows(userTable) {
+			let sum = 0
+			for (let i = 0; i < userTable.length; i += 2) {
+				for (let j = 0; j < userTable[i].length; j++) {
+					sum += userTable[i][j]
+				}
+			}
+			return sum
+		}
+		document.write(`5)Суму парних рядків = ${getSumOfEvenRows(userTable)}<br>`)
+		// 6
+		function getSumOfOddColums(userTable) {
+			let sum = 0
+			for (let i = 0; i < userTable.length; i++) {
+				for (let j = 1; j < userTable[i].length; j += 2) {
+					sum += userTable[i][j]
+				}
+			}
+			return sum
+		}
+		document.write(`6)Сума непарних стовпців = ${getSumOfOddColums(userTable)} <br>`)
+
+		// 7
+		function getSumEvenRowsOddColAndOddRowsEvenCol(userTable) {
+			let sum = 0
+			for (let i = 0; i < userTable.length; i++) {
+				if (i % 2 === 0) {
+					for (let c = 0; c < userTable[i].length; c++) {
+						if (c % 2 !== 0)
+							sum += userTable[i][c]
+					}
+				}
+				else {
+					for (let c = 0; c < userTable[i].length; c++) {
+						if (c % 2 === 0)
+							sum += userTable[i][c]
+					}
+				}
+			}
+			return sum
+		}
+
+		document.write(`7)У парних рядках – непарні стовпці, у непарних – парні = ${getSumEvenRowsOddColAndOddRowsEvenCol(userTable)}`)
+
+
+	</script>
+</body>
+
+</html>
